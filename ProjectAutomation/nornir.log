@@ -1,0 +1,189 @@
+2022-11-23 09:30:01,647 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 09:30:04,723 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 1046, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/paramiko/client.py", line 381, in connect
+    raise NoValidConnectionsError(errors)
+paramiko.ssh_exception.NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.1.1.1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 439, in __init__
+    self._open()
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 444, in _open
+    self.establish_connection()
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 1068, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.exceptions.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 10.1.1.1:22
+
+
+
+2022-11-23 09:30:04,724 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 16, in backup_configurations
+    r = task.run(task=netmiko_send_command,command_string="show run", enable=True)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-11-23 09:31:29,085 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 09:31:40,456 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 28, in netmiko_send_command
+    net_connect.enable()
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/cisco_base_connection.py", line 25, in enable
+    return super().enable(
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 1935, in enable
+    output += self.read_until_prompt()
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 755, in read_until_prompt
+    return self.read_until_pattern(
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/netmiko/base_connection.py", line 672, in read_until_pattern
+    raise ReadTimeout(msg)
+netmiko.exceptions.ReadTimeout: 
+
+Pattern not detected: 'R1' in output.
+
+Things you might try to fix this:
+1. Adjust the regex pattern to better identify the terminating string. Note, in
+many situations the pattern is automatically based on the network device's prompt.
+2. Increase the read_timeout to a larger value.
+
+You can also look at the Netmiko session_log or debug log for more information.
+
+
+
+2022-11-23 09:31:40,456 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 16, in backup_configurations
+    r = task.run(task=netmiko_send_command,command_string="show run", enable=True)
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 174, in run
+    raise NornirSubTaskError(task=run_task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: netmiko_send_command (failed)
+
+
+2022-11-23 09:32:51,029 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 09:33:52,955 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 10:40:58,907 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 10:46:47,142 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 10:47:29,460 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 10:48:18,525 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 10:48:56,226 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:08:06,932 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:09:14,906 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:33:04,103 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:35:27,685 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:39:02,364 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:42:18,002 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:45:35,831 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:49:11,496 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:53:42,448 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:57:33,086 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 11:59:34,723 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 12:44:11,287 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 12:44:34,116 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 12:44:56,989 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 13:00:33,214 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:29:13,907 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:31:04,034 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:31:43,568 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:32:20,687 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:32:54,155 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:33:42,762 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:33:44,947 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 34, in backup_configurations
+    run = sys.argv[1]
+IndexError: list index out of range
+
+2022-11-23 14:36:20,374 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:40:01,263 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:40:03,346 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 36, in backup_configurations
+    run = sys.argv[1]
+IndexError: list index out of range
+
+2022-11-23 14:45:16,193 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:45:18,200 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 28, in backup_configurations
+    print(validation.changed)
+NameError: name 'validation' is not defined
+
+2022-11-23 14:45:34,432 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:45:36,605 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'Creating Backup Archive' failed with traceback:
+Traceback (most recent call last):
+  File "/home/rojin/virtualP/ProjectAutomation/venv/lib/python3.10/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/home/rojin/virtualP/ProjectAutomation/archive.py", line 28, in backup_configurations
+    print(validation.changed)
+NameError: name 'validation' is not defined
+
+2022-11-23 14:57:16,210 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:58:32,697 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:58:42,558 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 14:59:24,816 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:03:48,501 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:04:23,195 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:04:46,987 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:07:26,904 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:08:03,820 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:39:46,868 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:40:37,416 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:40:59,010 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:42:08,610 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:42:25,973 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:52:20,369 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:52:42,743 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 15:53:45,788 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:14:15,019 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:14:52,042 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:15:01,984 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:15:31,545 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:22:54,833 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:23:13,816 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:23:46,602 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:27:34,313 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:29:29,980 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:36:35,470 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:37:22,451 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:37:56,999 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:38:34,846 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:40:00,152 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:40:35,726 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:41:42,351 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts
+2022-11-23 16:41:58,160 -  nornir.core -     INFO -        run() - Running task 'Creating Backup Archive' with args {} on 1 hosts

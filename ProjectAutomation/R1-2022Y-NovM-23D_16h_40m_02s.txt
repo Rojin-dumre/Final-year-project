@@ -1,0 +1,147 @@
+[1m[36mCreating Backup Archive*********************************************************
+[1m[34m* R1 ** changed : True *********************************************************
+[1m[32mvvvv Creating Backup Archive ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+[1m[32m---- netmiko_send_command ** changed : False ----------------------------------- INFO
+Building configuration...
+
+Current configuration : 1157 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+enable password cisco
+!
+no aaa new-model
+memory-size iomem 5
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name router
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 password 0 cisco
+username admin1 privilege 15 password 0 cisco
+archive
+ log config
+  hidekeys
+! 
+!
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 10.1.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^Cnamaaaaaaaa^C
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ exec-timeout 0 0
+ privilege level 15
+ login local
+ transport input ssh
+!
+!
+end
+
+[1m[33m---- write_file ** changed : True ---------------------------------------------- INFO
+--- config-archive/2022-11-23/R1.txt
+
++++ new
+
+@@ -1,6 +1,6 @@
+
+ Building configuration...
+ 
+-Current configuration : 1159 bytes
++Current configuration : 1157 bytes
+ !
+ version 12.4
+ service timestamps debug datetime msec
+@@ -97,7 +97,7 @@
+
+ !
+ !
+ !
+-banner motd ^Cnamaste123456^C
++banner motd ^Cnamaaaaaaaa^C
+ !
+ line con 0
+  exec-timeout 0 0
+[1m[32m^^^^ END Creating Backup Archive ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
