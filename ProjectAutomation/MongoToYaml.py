@@ -41,8 +41,11 @@ with open('databuff.txt', 'r') as h, open('datafinal.txt', 'w') as ho:
     for line in h:
         ho.write(line.replace("__v: 0", ""))
 
+directory = '/home/rojin'
+filename = "hosts.yaml"
+file_path = os.path.join(directory, filename)
 
-with open('datafinal.txt', 'r') as i, open('hosts.yaml', 'w') as io:
+with open('datafinal.txt', 'r') as i, open(file_path, 'w') as io:
     for line in i:
         io.write(line.replace("groups: ", 'groups:\n\n         - '))
 
